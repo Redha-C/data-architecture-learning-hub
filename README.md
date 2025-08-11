@@ -6,23 +6,30 @@ data-architecture-learning-hub/
 │
 ├── README.md
 │
-├── 01_digital_product_basics/
-│   ├── product_lifecycle.md
-│   ├── user_journey_data.md
-│   └── architecture_overview.md                  # Why this high-level understanding matters
+├── 01_case_overview/
+│   ├── business_context.md         # goals, KPIs, business processes
+│   └── architecture_diagram.md     # high-level diagram + sequence flows
 │
-├── 02_oltp_systems/
-│   ├── relational_databases.md
-│   ├── nosql_databases.md
-│   ├── transactions_and_api.md
-│   └── comparison.md                  # When OLTP is the right choice & trade-offs
+├── 02_oltp_layer/                  # Operational side (why & when in each)
+│   ├── postgres_core/
+│   │   ├── why_and_when.md
+│   │   ├── schema.ddl.sql          # DDL for orders, payments, shipments...
+│   │   └── seed_data.sql           # small seeds for demos
+│   ├── mongodb_catalog/
+│   │   ├── why_and_when.md
+│   │   └── product_document_examples.json
+│   ├── redis_cache/
+│   │   └── why_and_when.md
+│   └── elasticsearch_search/
+│       ├── why_and_when.md
+│       └── index_template.json
 │
 ├── 03_data_integration_layer/
 │   ├── etl_vs_elt.md
 │   ├── change_data_capture.md
 │   ├── streaming_vs_batch.md
-│   ├── data_quality.md
-│   └── comparison.md                  # Choosing ETL vs ELT, batch vs streaming
+│   ├── data_quality.md              # SLAs, expectations, tests
+│   └── comparison.md                # Choosing ETL vs ELT, batch vs streaming
 │
 ├── 04_olap_and_analytics_layer/
 │   ├── olap_concepts.md
