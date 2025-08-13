@@ -2,15 +2,13 @@
 
 ```mermaid
 flowchart LR
-  %% Frontend
   subgraph FE[Frontend]
-    NX[Next.js (React, TS)]
-    CDN[CDN / Edge Cache]
+    NX[Nextjs React TS]
+    CDN[CDN and Edge Cache]
   end
 
-  NX -- HTTPS --> AGW[API Gateway / BFF]
+  NX --> AGW[API Gateway]
 
-  %% Backend services (own their data)
   subgraph SVC[Backend Microservices]
     AU[Auth] --> AUDB[(PostgreSQL)]
     UP[User Profile] --> UPDB[(PostgreSQL)]
@@ -25,19 +23,10 @@ flowchart LR
     NOTIF[Notifications] --> NODB[(PostgreSQL)]
   end
 
-  %% Event bus for async flows
-  subgraph BUS[Event Bus]
-    KAF[Kafka / SNS+SQS]
-  end
-
-  %% Object storage for assets
-  OBJ[(Object Storage: S3/GCS)]
-  MDS[(Media: images/videos)]
-  MDS --- OBJ
+  OBJ[(Object Storage)]
   NX --- CDN
   CDN --- OBJ
 
-  %% Calls
   NX --> SRCH
   AGW --> AU
   AGW --> UP
@@ -50,11 +39,14 @@ flowchart LR
   ORD --> SHP
   SRCH --> ES
 
-  %% Events
-  ORD -- OrderCreated/OrderPaid --> KAF
-  PAY -- PaymentAuthorized/Failed --> KAF
-  INV -- InventoryReserved/Released --> KAF
+  subgraph BUS[Event Bus]
+    KAF[Kafka or SNS SQS]
+  end
+
+  ORD -- OrderCreated or OrderPaid --> KAF
+  PAY -- PaymentAuthorized or Failed --> KAF
+  INV -- InventoryReserved or Released --> KAF
   SHP -- ShipmentCreated --> KAF
-  KAF -- reindex --> SRCH
-  KAF -- send emails --> NOTIF
-  KAF -- cache invalidation --> CART
+  KAF -- Reindex --> SRCH
+  KAF -- Send Emails --> NOTIF
+  KAF -- Cache Invalidation --> CART
