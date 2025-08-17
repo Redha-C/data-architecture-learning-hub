@@ -81,11 +81,15 @@ When Inventory or Catalog changes:
 
 # Key takeaways from the diagram in user journey terms
 
+<p align="center">
+<img src="../images/user_journey.png" alt="Alt text" width="1000">
+</p>
+
 1. Frontend (Next.js + CDN) = fast, globally served customer experience.
 
 2. API Gateway = the single entry point for all user-facing requests.
 
-3. MongoDB (Catalog) = flexible product data for browsing.
+3. MongoDB (Product Catalog) = flexible product data for browsing.
 
 4. Elasticsearch (Search) = fast and relevant search results.
 
