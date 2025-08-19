@@ -5,7 +5,7 @@ An **API Gateway** is a service that acts as an intermediary between the fronten
 Let's consider the schema below: 
 
 <p align="center">
-<img src="../../images/architecture_diagram_website_front_and_back.png" alt="Alt text" width="1000">
+<img src="../../../images/architecture_diagram_website_front_and_back.png" alt="Alt text" width="1000">
 </p>
 
 Without an API Gateway, when a user interacts with the website (e.g., clicking a button), the frontend would need to send **multiple requests** to various backend microservices to gather the necessary data and render the UI.  
