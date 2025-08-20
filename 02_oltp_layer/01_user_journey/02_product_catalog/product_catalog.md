@@ -1,0 +1,90 @@
+# Product catalog 
+Let's consider the user journey: 
+
+<p align="center">
+<img src="../../../images/user_journey.png" alt="Alt text" width="1000">
+</p>
+
+# 1. Why choosing a NoSQL database for the product catalog? [1][2]
+
+When a user lands on the **Sportify** website, they begin by browsing the product catalog — scrolling through categories, searching for items, and viewing detailed product pages.
+
+All this information is powered by data — and in e-commerce architectures, this data can be stored in a **non-relational (NoSQL) database**. NoSQL stands for **“Not Only SQL”**, and it represents a family of databases designed for flexibility, scalability, and performance.
+
+So, why choose a NoSQL database over a traditional relational database for the product catalog?
+
+Here are the three main reasons:
+
+---
+
+### 1.1 No strong relationships with other entities  
+Unlike transactional services (e.g., checkout, orders, inventory), which require tight coupling and relational integrity, the product catalog is relatively **self-contained**.  
+Products typically don’t require complex joins with other entities — each item can be stored as a **document** with all relevant fields (title, description, price, color, tags, etc.).
+
+---
+
+### 1.2 Frequent schema changes  
+Retailers frequently update their product catalogs — especially with **seasonal products**, **promotions**, or **flash sales** (e.g., Black Friday, summer collections).  
+With NoSQL databases, you can **modify the schema on the fly**, which is much harder with traditional relational databases due to rigid **ACID constraints** and the need for schema migrations.
+
+---
+
+### 1.3 High read performance at scale  
+The product catalog is one of the **most-read components** of an e-commerce platform. Thousands of users may browse products simultaneously.  
+NoSQL databases (especially document stores and key-value stores) **scale horizontally** and can handle high read loads more efficiently than RDBMSs in this context.
+
+# 2. Why using MongoDB over Cassandra or Couchbase for product catalog?
+
+### 2.1 Document Model Matches Catalog Needs
+
+- MongoDB stores data as rich JSON-like documents (BSON), making it ideal for representing a product with nested attributes—variants, tags, pricing, media, etc. This delivers a flexible, intuitive schema that aligns perfectly with real-world product structures.
+
+[Cassandra vs MongoDB Comparison](https://www.mongodb.com/resources/compare/cassandra-vs-mongodb?
+Cassandra, in contrast, is a wide-column store optimized for high-volume writes and simple lookups, not structured, nested documents. It's better for time-series or log data rather than mutable, rich catalog items.)
+
+- Cassandra, in contrast, is a wide-column store optimized for high-volume writes and simple lookups, not structured, nested documents. It's better for time-series or log data rather than mutable, rich catalog items.
+
+https://www.altoros.com/blog/nosql-comparison-2021-couchbase-server-mongodb-and-cassandra-datastax/?utm_source
+https://en.wikipedia.org/wiki/Apache_Cassandra?utm_source
+
+---
+
+### 2.2 Query Flexibility and Developer Experience
+
+MongoDB supports ad-hoc queries, rich indexing, array filters, aggregations, and lookups—all in a developer-friendly model. This simplifies building features like filters, search suggestions, and category grouping.
+
+[Wikipédia](https://en.wikipedia.org/wiki/MongoDB?utm_source)
+
+Couchbase is a document store too, but adds complexity with N1QL querying and fewer community resources supporting agile adoption.
+
+https://www.sprinkledata.com/blogs/couchbase-vs-mongodb-a-comprehensive-comparison-of-leading-nosql-databases?utm_source
+
+---
+
+### 2.3 Strong Documentation, Ecosystem, and Tooling
+
+MongoDB delivers rich developer resources: official documentation, MongoDB University, open source tooling like Compass, and an active ecosystem — all of which accelerate onboarding and architecture iteration.
+
+[Couchbase](https://info.couchbase.com/rs/302-GJY-034/images/NoSQL_Technical_Comparison_Report_Couchbase_Server_Cassandra_MongoDB_2017.pdf?utm_source)
+[Wikipédia](https://en.wikipedia.org/wiki/MongoDB?utm_source)
+
+Cassandra’s learning curve is steeper in comparison, especially for indexing and query design.
+
+[Wikipédia](https://stackshare.io/stackups/cassandra-vs-couchbase-vs-mongodb?utm_source)
+
+---
+
+### 2.4 Balanced Scalability, Speed & Consistency
+
+MongoDB offers managed global services (Atlas) with automatic sharding and high availability for operational ease.
+
+[IT Pro](https://www.itpro.com/cloud/367937/best-cloud-databases-in-2022?utm_source)
+
+While Couchbase handles scaling well, it requires more manual tuning and configuration (node balancing, cluster rebalancing). For most product catalog needs, MongoDB is easier operationally.
+
+[Couchbase](https://www.couchbase.com/blog/3-reasons-enterprises-turn-from-mongodb-to-couchbase/?utm_source=chatgpt.com)
+
+# Bibliography
+[1] [NoSQL vs. relational: Which database should you use for your app? - Microsoft](https://devblogs.microsoft.com/cosmosdb/nosql-vs-relational-which-database-should-you-use-for-your-app/#:~:text=Traditionally%2C%20the%20answer%20has%20been,handle%20anymore%20requests%20or%20data.)
+
+[2] [When to Use a NoSQL Database - MongoDB](https://www.mongodb.com/resources/basics/databases/nosql-explained/when-to-use-nosql)
